@@ -279,7 +279,7 @@ function Game(props: GameProps) {
       <br />
       <hr />
       <br />
-      <div>
+      <div className="mt-4 text-gray-500 dark:text-gray-400">
         Nombre de bonnes réponses : {props.score}{" "}
         {props.gameCount === 0 ? "" : `/ ${props.gameCount}`}
       </div>
