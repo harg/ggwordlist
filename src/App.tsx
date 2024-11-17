@@ -1,7 +1,9 @@
-import { Route, Switch } from "wouter";
+import { Route, Switch, useLocation } from "wouter";
 import HomePage from "./pages/home_page";
-import PageA from "./pages/page_a";
+import Auth from "./pages/auth_page";
 import NotFoundPage from "./pages/404_page";
+import { useEffect, useState } from "react";
+import { supabase } from "./supabase_client";
 
 // const items = [
 //   {
@@ -23,7 +25,25 @@ import NotFoundPage from "./pages/404_page";
 // ];
 
 const App = () => {
-  // const [location, setLocation] = useLocation();
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = await supabase.auth.getUser();
+      setUser(user?.data.user ?? null);
+    };
+
+    fetchUser();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (_, session) => {
+        setUser(session?.user ?? null);
+      },
+    );
+
+    return () => authListener.subscription.unsubscribe();
+  }, []);
+  const [_, setLocation] = useLocation();
   // const [current, setCurrent] = useState("");
   //
   // const onClick: MenuProps["onClick"] = (e: any) => {
@@ -33,13 +53,21 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1 className="text-3xl font-bold underline">Layout</h1>
+      <div>
+        {user ? (
+          <div>
+            <button onClick={() => setLocation("/auth")}>Admin</button>
+          </div>
+        ) : (
+          <button onClick={() => setLocation("/auth")}>Admin</button>
+        )}
+      </div>
       <Switch>
         <Route path="/">
           <HomePage />
         </Route>
-        <Route path="/page_a">
-          <PageA />
+        <Route path="/auth">
+          <Auth user={user} />
         </Route>
         <Route path="/:anything*">
           <NotFoundPage />

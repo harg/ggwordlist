@@ -2,17 +2,6 @@ import { HiMiniPlusCircle, HiArrowPath, HiCheckCircle } from "react-icons/hi2";
 import React, { useState, useRef, useEffect } from "react";
 
 const initialWordList = ["la pomme", "le bébé"];
-// const initialWordToGuess = ""; // initialWordList[Math.floor(Math.random() * initialWordList.length)]
-
-// const useWLStore: any = create((set, get) => ({
-//   wordList: initialWordList,
-//   wordToGuess: initialWordToGuess,
-//   setWordToGuess: () => set((state :any) => ({ wordToGuess: get().wordList[Math.floor(Math.random() * get().wordList.length)] })),
-// }));
-
-//
-// const wordlits = ['à côté de', 'alors', 'après', 'assez', "aujourd'hui", aussi, autour, autrefois, avant, avec, beaucoup, bien, bientôt, car, chez, contre, combien, comment]
-// 'C;;;;;;;; O;;;;;;;; M;;;;;;;; M;;;;;;;; É;;;;;;;; N;;;;;;;; T;;;;;;;;'
 
 // TODO : onfocus sur letter => focus sur dernier input
 
@@ -41,11 +30,6 @@ const utterThis = new SpeechSynthesisUtterance();
 utterThis.lang = "fr-FR";
 
 export default function HomePage() {
-  // const wordList = useWLStore((state:any) => state.wordList);
-  // const wordToGuess = wordList[Math.floor(Math.random() * wordList.length)]
-  //const wordToGuess = useWLStore((state:any) => state.wordToGuess);
-  // const setWordToGuess = useWLStore((state:any) => state.setWordToGuess);
-
   const [appState, setAppState] = useState<AppState>({
     wordlist: initialWordList,
     wordToGuess:
