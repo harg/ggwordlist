@@ -1,5 +1,6 @@
 import { HiMiniPlusCircle, HiArrowPath, HiCheckCircle } from "react-icons/hi2";
 import React, { useState, useRef, useEffect } from "react";
+import ConfettiExplosion, { ConfettiProps } from "react-confetti-explosion";
 
 const initialWordList = ["la pomme", "le bébé"];
 
@@ -82,9 +83,18 @@ type GameProps = {
   incScore: (inc: 0 | 1) => void;
 };
 
+const explodingProps: ConfettiProps = {
+  force: 0.5,
+  duration: 3000,
+  particleCount: 100,
+  width: 1000,
+  colors: ["#9A0023", "#FF003C", "#AF739B", "#FAC7F3", "#F7DBF4"],
+};
+
 function Game(props: GameProps) {
   const textInputs = useRef<any>(null);
   const repeatBtn = useRef<HTMLButtonElement>(null);
+  const [isExploding, setIsExploding] = useState(false);
 
   const [gameState, setGameState] = useState<GameState>(initialGameState);
   const [mustSpeak, setMustSpeak] = useState<boolean>(true);
@@ -151,6 +161,7 @@ function Game(props: GameProps) {
       gameState.letters.join("").toUpperCase()
     ) {
       setGameState({ ...gameState, result: res.WIN });
+      setIsExploding(true);
       props.incScore(1);
       speech("Bien joué!");
     } else {
@@ -232,6 +243,9 @@ function Game(props: GameProps) {
       {gameState.result === res.WIN ? (
         <div className="text-3xl font-bold text-purple py-10 ">
           Bien joué! 😊
+          <div className="flex items-center justify-center">
+            {isExploding && <ConfettiExplosion {...explodingProps} />}
+          </div>
         </div>
       ) : (
         ""
