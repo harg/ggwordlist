@@ -3,7 +3,6 @@ import React, { useState, useRef, useEffect } from "react";
 import ConfettiExplosion, { ConfettiProps } from "react-confetti-explosion";
 
 const initialWordList = [
-<<<<<<< HEAD
   "la pomme",
   "le bébé",
   "la poire",
