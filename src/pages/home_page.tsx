@@ -2,7 +2,33 @@ import { HiMiniPlusCircle, HiArrowPath, HiCheckCircle } from "react-icons/hi2";
 import React, { useState, useRef, useEffect } from "react";
 import ConfettiExplosion, { ConfettiProps } from "react-confetti-explosion";
 
-const initialWordList = ["la pomme", "le bébé"];
+const initialWordList = [
+  "la pomme",
+  "le bébé",
+  "la poire",
+  "le citron",
+  "le garçon",
+  "la montagne",
+  "la rose",
+  "zéro",
+  "le chien",
+  "le nez",
+  "le boulanger",
+  "le poulet",
+  "la guitare",
+  "le gant",
+  "la neige",
+  "la maison",
+  "le chat",
+  "grand",
+  "froid",
+  "un abricot",
+  "le kangourou",
+  "le cirque",
+  "le lapin",
+  "la main",
+  "la peinture",
+];
 
 // TODO : onfocus sur letter => focus sur dernier input
 
